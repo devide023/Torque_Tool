@@ -12,7 +12,7 @@ namespace Torque.Common
         /// <summary>
         /// 设置扭矩单位
         /// cmd:N.m：06，kgf•cm：02，
-        //  kgf•m：03，lbf•in：08，lbf•ft：09
+        /// kgf•m：03，lbf•in：08，lbf•ft：09
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>

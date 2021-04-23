@@ -19,7 +19,7 @@ namespace Torque_Tool
         public Form1()
         {
             InitializeComponent();
-            sys_serial option = new sys_serial() { PortName="COM4"};
+            sys_serial option = new sys_serial() { PortName="COM10"};
             s = SerialService.CreateInstance(option);
             s.Received_Data += S_Received_Data;
             s.Init();

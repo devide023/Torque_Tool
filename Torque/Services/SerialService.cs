@@ -34,6 +34,9 @@ namespace Torque.Services
             }
             return _Singleton;
         }
+        /// <summary>
+        /// 连接参数初始化
+        /// </summary>
         public void Init()
         {
             if (!serialPort.IsOpen)
@@ -45,6 +48,7 @@ namespace Torque.Services
                     serialPort.DataBits = _sys_serial.DataBits;
                     serialPort.StopBits = _sys_serial.StopBits;
                     serialPort.Parity = _sys_serial.Parity;
+                    serialPort.Encoding = Encoding.UTF8;
                     serialPort.DataReceived += SerialPort_DataReceived;
                     serialPort.Open();
                 }
@@ -62,7 +66,7 @@ namespace Torque.Services
                 int result = serialPort.Read(m_recvBytes, 0, m_recvBytes.Length); //从串口读取数据  
                 if (result <= 0)
                     return;
-                string strResult = Encoding.ASCII.GetString(m_recvBytes, 0, m_recvBytes.Length); //对数据进行转换  
+                string strResult = Encoding.UTF8.GetString(m_recvBytes, 0, m_recvBytes.Length); //对数据进行转换  
                 serialPort.DiscardInBuffer();
                 if (Received_Data != null)
                 {
@@ -74,7 +78,10 @@ namespace Torque.Services
                 throw;
             }
         }
-
+        /// <summary>
+        /// 发送命令
+        /// </summary>
+        /// <param name="cmd"></param>
         public void SendCmd(byte[] cmd)
         {
             if (serialPort.IsOpen)
@@ -83,7 +90,9 @@ namespace Torque.Services
                 serialPort.Write(cmd, 0, cmd.Length);
             }
         }
-
+        /// <summary>
+        /// 关闭与串口的连接
+        /// </summary>
         public void Close() 
         {
             if (serialPort.IsOpen)
