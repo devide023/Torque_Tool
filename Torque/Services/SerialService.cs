@@ -15,20 +15,21 @@ namespace Torque.Services
         private SerialPort serialPort;
         private static SerialService _Singleton = null;
         private static object Singleton_Lock = new object();
-        public sys_serial Serial_Option { get; set; } = new sys_serial();
+        private sys_serial _sys_serial=new sys_serial();
         public event EventHandler<ReceiveData_EventArgs> Received_Data;
         private SerialService()
         {
             serialPort = new SerialPort();
         }
 
-        public static SerialService CreateInstance()
+        public static SerialService CreateInstance(sys_serial serial_option)
         {
             lock (Singleton_Lock)
             {
                 if (_Singleton == null)
                 {
                     _Singleton = new SerialService();
+                    _Singleton._sys_serial = serial_option;
                 }
             }
             return _Singleton;
@@ -39,11 +40,11 @@ namespace Torque.Services
             {
                 try
                 {
-                    serialPort.PortName = Serial_Option.PortName;
-                    serialPort.BaudRate = Serial_Option.BaudRate;
-                    serialPort.DataBits = Serial_Option.DataBits;
-                    serialPort.StopBits = Serial_Option.StopBits;
-                    serialPort.Parity = Serial_Option.Parity;
+                    serialPort.PortName = _sys_serial.PortName;
+                    serialPort.BaudRate = _sys_serial.BaudRate;
+                    serialPort.DataBits = _sys_serial.DataBits;
+                    serialPort.StopBits = _sys_serial.StopBits;
+                    serialPort.Parity = _sys_serial.Parity;
                     serialPort.DataReceived += SerialPort_DataReceived;
                     serialPort.Open();
                 }
