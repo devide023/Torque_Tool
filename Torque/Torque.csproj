@@ -41,15 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="InterFaces\ICmd.cs" />
+    <Compile Include="Models\ReceiveData_EventArgs.cs" />
     <Compile Include="Models\sys_config.cs" />
     <Compile Include="Models\sys_receive_data.cs" />
     <Compile Include="Models\sys_send_data.cs" />
+    <Compile Include="Models\sys_send_result.cs" />
     <Compile Include="Models\sys_serial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SerialService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

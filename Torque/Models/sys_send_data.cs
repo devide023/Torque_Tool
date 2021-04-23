@@ -16,5 +16,13 @@ namespace Torque.Models
         /// 扭力值下限
         /// </summary>
         public float Low { get; set; }
+        /// <summary>
+        /// 角度上限
+        /// </summary>
+        public float Ang_Hi { get; set; }
+        /// <summary>
+        /// 角度下限
+        /// </summary>
+        public float Ang_Lo { get; set; }
     }
 }
