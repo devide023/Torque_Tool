@@ -13,5 +13,6 @@ namespace Torque.Models
     {
         public string code { get; set; }
         public string msg { get; set; }
+        public string txt { get; set; }
     }
 }

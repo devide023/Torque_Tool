@@ -47,7 +47,7 @@ namespace Torque.Common
         /// 设置密合扭矩值
         /// 包含小数点合计5位
         /// 设定范围为最大扭矩值的5%~最大扭矩值（可以设置为0）。
-        //请手动将角度功能设定为ON之后，再进行送信
+        ///请手动将角度功能设定为ON之后，再进行设置
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
