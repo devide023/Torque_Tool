@@ -19,25 +19,17 @@ namespace Torque.Services
         private static object Singleton_Lock = new object();
         private sys_option _sys_serial = new sys_option();
         public event Action<sys_receive_data> Receive_Result;
+        public event Action<sys_message> Event_Msg;
+        private sys_message msg = new sys_message();
         /// <summary>
         /// 保持读取开关
         /// </summary>
         bool _keepReading = true;
-
-        /// <summary>
-        /// 检测频率【检测等待时间，毫秒】【按行读取，可以不用】
-        /// </summary>
-        int _jcpl = 1;
-
         /// <summary>
         /// 字符串队列
         /// </summary>
         ConcurrentQueue<string> _cq = new ConcurrentQueue<string>();
-
-        /// <summary>
-        /// 字节数据队列
-        /// </summary>
-        ConcurrentQueue<byte[]> _cqBZ = new ConcurrentQueue<byte[]>();
+        
         private SerialService()
         {
             serialPort = new SerialPort();
@@ -83,7 +75,10 @@ namespace Torque.Services
                 }
                 catch (Exception ex)
                 {
-                    Tool.Write_File(ex.Message);
+                    msg.msgtype = Common.Common.MessageType.Error;
+                    msg.messageinfo = ex.Message;
+                    msg.is_success = false;
+                    Event_Msg?.Invoke(msg);
                 }
             }
         }
@@ -115,7 +110,10 @@ namespace Torque.Services
                 _Singleton._sys_serial.CommuitType = value;
             }
         }
-
+        /// <summary>
+        /// 数据解析逻辑
+        /// </summary>
+        /// <param name="strResult"></param>
         private void ReceiveData_Logic(string strResult)
         {
             sys_receive_data return_data = new sys_receive_data();
@@ -136,20 +134,36 @@ namespace Torque.Services
                 switch (r[0])
                 {
                     case "RE003":
-                        ret.txt = "受信完成";
+                        ret.txt = "设置成功";
+                        msg.msgtype = Common.Common.MessageType.Info;
+                        msg.messageinfo = ret.txt;
+                        msg.is_success = true;
+                        Event_Msg?.Invoke(msg);
                         break;
                     case "RE004":
-                        ret.txt = "受信错误,设定值错误";
+                        ret.txt = "设定值错误";
+                        msg.msgtype = Common.Common.MessageType.Error;
+                        msg.messageinfo = ret.txt;
+                        msg.is_success = false;
+                        Event_Msg?.Invoke(msg);
                         break;
                     case "E10":
-                        ret.txt = "受信错误,设定值错误,送信指令的前端没有附加AT时的错误";
+                        ret.txt = "设定值错误,送信指令的前端没有附加AT指令";
+                        msg.msgtype = Common.Common.MessageType.Error;
+                        msg.messageinfo = ret.txt;
+                        msg.is_success = false;
+                        Event_Msg?.Invoke(msg);
                         break;
                     default:
                         ret.txt = strResult;
+                        msg.msgtype = Common.Common.MessageType.Info;
+                        msg.messageinfo = ret.txt;
+                        msg.is_success = false;
+                        Event_Msg?.Invoke(msg);
                         break;
                 }
                 return_data.ReturnType = Common.Common.ReturnDataType.SettingRet;
-                return_data.Send_Result = ret;
+                return_data.Send_Result = ret;                
             }
             //接收仪器主动发送的值
             else if (re)
@@ -198,7 +212,11 @@ namespace Torque.Services
 
             Receive_Result?.Invoke(return_data);
         }
-
+        /// <summary>
+        /// 事件触发
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -215,6 +233,10 @@ namespace Torque.Services
             }
             catch (Exception ex)
             {
+                msg.msgtype = Common.Common.MessageType.Error;
+                msg.messageinfo = ex.Message;
+                msg.is_success = false;
+                Event_Msg?.Invoke(msg);
             }
         }
         /// <summary>
@@ -249,13 +271,19 @@ namespace Torque.Services
             {
                 if (serialPort == null)
                 {
-                    //ViewCommStatus(false, "串口对象未实例化！");
+                    msg.msgtype = Common.Common.MessageType.Error;
+                    msg.messageinfo = "串口对象未实例化";
+                    msg.is_success = false;
+                    Event_Msg?.Invoke(msg);
                     Thread.Sleep(3000); //3秒后重新检测
                     continue;
                 }
                 if (!serialPort.IsOpen)
                 {
-                    //ViewCommStatus(false, "串口未打开");
+                    msg.msgtype = Common.Common.MessageType.Error;
+                    msg.messageinfo = "串口未打开";
+                    msg.is_success = false;
+                    Event_Msg?.Invoke(msg);
                     Thread.Sleep(3000);
                     continue;
                 }
@@ -269,25 +297,20 @@ namespace Torque.Services
                         _cq.Enqueue(buffer);
                     }
                     #endregion
-
-                    //#region 字节读取
-                    //byte[] readBuffer = new byte[_sp.ReadBufferSize + 1];
-                    //int count = _sp.Read(readBuffer, 0, _sp.ReadBufferSize);
-                    //if (count != 0)
-                    //{
-                    //    _cqBZ.Enqueue(readBuffer);
-                    //}
-                    //#endregion
-
-                    //ViewCommStatus(true, "串口通信正常");
                 }
                 catch (TimeoutException) //注意超时时间的定义
                 {
-                    //ViewCommStatus(false, "串口读取超时！");
+                    msg.msgtype = Common.Common.MessageType.Error;
+                    msg.messageinfo = "串口读取超时";
+                    msg.is_success = false;
+                    Event_Msg?.Invoke(msg);
                 }
                 catch (Exception ex) //排除隐患后可以去掉。
                 {
-                    //ViewCommStatus(false, "串口读取异常：" + ex.Message);
+                    msg.msgtype = Common.Common.MessageType.Error;
+                    msg.messageinfo = $"串口读取异常:{ex.Message}";
+                    msg.is_success = false;
+                    Event_Msg?.Invoke(msg);
                 }
 
             }
@@ -310,12 +333,68 @@ namespace Torque.Services
                 {
                     string strTmp = "";
                     _cq.TryDequeue(out strTmp);
-                    Console.WriteLine(strTmp);
                     ReceiveData_Logic(strTmp);
                 }
                 #endregion
             }
 
+        }
+        /// <summary>
+        /// 发送指令,设置了密合扭矩需要设置角度上下限，合符判断才会判断角度
+        /// </summary>
+        /// <param name="cmds"></param>
+        public void SendCmd(sys_send_cmd cmd)
+        {
+            cmd.Torque_Hi = cmd.Torque_Hi.Trim();
+            cmd.Torque_Lo = cmd.Torque_Lo.Trim();
+            cmd.Unit = cmd.Unit.Trim();
+            cmd.Torque_Close = cmd.Torque_Close.Trim();
+            cmd.Ang_Second = cmd.Ang_Second.Trim();
+            cmd.Ang_Hi = cmd.Ang_Hi.Trim();
+            cmd.Ang_Lo = cmd.Ang_Lo.Trim();
+            ConcurrentQueue<byte[]> cmd_list = new ConcurrentQueue<byte[]>();
+            //设置扭矩上下限
+            if (!string.IsNullOrEmpty(cmd.Torque_Hi) && !string.IsNullOrEmpty(cmd.Torque_Lo))
+            {
+                byte[] torque_cmd = Command.SetTorque_HiLo(cmd.Torque_Hi, cmd.Torque_Lo);
+                cmd_list.Enqueue(torque_cmd);
+            }
+            //密合扭矩设置
+            if (!string.IsNullOrEmpty(cmd.Torque_Close))
+            {
+                byte[] mh_cmd = Command.SetTorque_MH(cmd.Torque_Close);
+                cmd_list.Enqueue(mh_cmd);
+            }
+            //角度设置
+            if (
+                !string.IsNullOrEmpty(cmd.Ang_Second) &&
+                !string.IsNullOrEmpty(cmd.Ang_Hi) &&
+                !string.IsNullOrEmpty(cmd.Ang_Lo)
+               )
+            {
+                byte[] ang_cmd = Command.SetAng_D(cmd.Ang_Second,cmd.Ang_Lo,cmd.Ang_Hi);
+                cmd_list.Enqueue(ang_cmd);
+            }
+            //单位设置
+            if (!string.IsNullOrEmpty(cmd.Unit))
+            {
+                Common.Common.TorqueUnit t = (Common.Common.TorqueUnit)Enum.Parse(typeof(Common.Common.TorqueUnit), cmd.Unit);
+                byte[] unit_cmd = Command.SetUnit(t);
+                cmd_list.Enqueue(unit_cmd);
+            }
+            if (serialPort.IsOpen)
+            {
+                while (!cmd_list.IsEmpty)
+                {
+                    byte[] cmditem;
+                    bool isok = cmd_list.TryDequeue(out cmditem);
+                    if (isok)
+                    {
+                        Thread.Sleep(200);
+                        serialPort.Write(cmditem, 0, cmditem.Length);
+                    }
+                }
+            }
         }
     }
 }

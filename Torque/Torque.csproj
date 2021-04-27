@@ -46,7 +46,9 @@
     <Compile Include="Common\Tool.cs" />
     <Compile Include="InterFaces\ICmd.cs" />
     <Compile Include="Models\sys_config.cs" />
+    <Compile Include="Models\sys_message.cs" />
     <Compile Include="Models\sys_receive_data.cs" />
+    <Compile Include="Models\sys_send_cmd.cs" />
     <Compile Include="Models\sys_send_result.cs" />
     <Compile Include="Models\sys_option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

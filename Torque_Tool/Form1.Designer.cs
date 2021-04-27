@@ -48,28 +48,29 @@ namespace Torque_Tool
             this.label5 = new System.Windows.Forms.Label();
             this.tb_c_torque = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tb_c_ang = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tb_c_check = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.tb_c_torque_unit = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tb_c_ang_unit = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.tb_c_result = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tb_c_worktype = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.tb_c_no = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_c_result = new System.Windows.Forms.TextBox();
             this.tb_c_sn = new System.Windows.Forms.TextBox();
+            this.tb_c_no = new System.Windows.Forms.TextBox();
+            this.tb_c_worktype = new System.Windows.Forms.TextBox();
+            this.tb_c_check = new System.Windows.Forms.TextBox();
+            this.tb_c_ang_unit = new System.Windows.Forms.TextBox();
+            this.tb_c_ang = new System.Windows.Forms.TextBox();
+            this.tb_c_torque_unit = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -252,47 +253,6 @@ namespace Torque_Tool
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "当前值";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 36);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "扭力值：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(221, 42);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "角度值：";
-            // 
-            // tb_c_ang
-            // 
-            this.tb_c_ang.Location = new System.Drawing.Point(280, 33);
-            this.tb_c_ang.Name = "tb_c_ang";
-            this.tb_c_ang.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_ang.TabIndex = 14;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(417, 42);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "合符判定";
-            // 
-            // tb_c_check
-            // 
-            this.tb_c_check.Location = new System.Drawing.Point(481, 36);
-            this.tb_c_check.Name = "tb_c_check";
-            this.tb_c_check.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_check.TabIndex = 14;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -301,29 +261,6 @@ namespace Torque_Tool
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 15;
             this.label9.Text = "扭力单位";
-            // 
-            // tb_c_torque_unit
-            // 
-            this.tb_c_torque_unit.Location = new System.Drawing.Point(82, 71);
-            this.tb_c_torque_unit.Name = "tb_c_torque_unit";
-            this.tb_c_torque_unit.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_torque_unit.TabIndex = 14;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(209, 74);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 12);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "角度单位：";
-            // 
-            // tb_c_ang_unit
-            // 
-            this.tb_c_ang_unit.Location = new System.Drawing.Point(280, 71);
-            this.tb_c_ang_unit.Name = "tb_c_ang_unit";
-            this.tb_c_ang_unit.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_ang_unit.TabIndex = 14;
             // 
             // label11
             // 
@@ -334,29 +271,6 @@ namespace Torque_Tool
             this.label11.TabIndex = 15;
             this.label11.Text = "输出结果";
             // 
-            // tb_c_result
-            // 
-            this.tb_c_result.Location = new System.Drawing.Point(481, 71);
-            this.tb_c_result.Name = "tb_c_result";
-            this.tb_c_result.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_result.TabIndex = 14;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(624, 42);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(53, 12);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "工作模式";
-            // 
-            // tb_c_worktype
-            // 
-            this.tb_c_worktype.Location = new System.Drawing.Point(694, 39);
-            this.tb_c_worktype.Name = "tb_c_worktype";
-            this.tb_c_worktype.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_worktype.TabIndex = 14;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -365,13 +279,6 @@ namespace Torque_Tool
             this.label13.Size = new System.Drawing.Size(41, 12);
             this.label13.TabIndex = 15;
             this.label13.Text = "流水号";
-            // 
-            // tb_c_no
-            // 
-            this.tb_c_no.Location = new System.Drawing.Point(694, 74);
-            this.tb_c_no.Name = "tb_c_no";
-            this.tb_c_no.Size = new System.Drawing.Size(108, 21);
-            this.tb_c_no.TabIndex = 14;
             // 
             // label14
             // 
@@ -382,12 +289,106 @@ namespace Torque_Tool
             this.label14.TabIndex = 15;
             this.label14.Text = "机器号";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(624, 42);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 12);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "工作模式";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(417, 42);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "合符判定";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(209, 74);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 12);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "角度单位：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(221, 42);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "角度值：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(23, 36);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "扭力值：";
+            // 
+            // tb_c_result
+            // 
+            this.tb_c_result.Location = new System.Drawing.Point(481, 71);
+            this.tb_c_result.Name = "tb_c_result";
+            this.tb_c_result.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_result.TabIndex = 14;
+            // 
             // tb_c_sn
             // 
             this.tb_c_sn.Location = new System.Drawing.Point(869, 36);
             this.tb_c_sn.Name = "tb_c_sn";
             this.tb_c_sn.Size = new System.Drawing.Size(108, 21);
             this.tb_c_sn.TabIndex = 14;
+            // 
+            // tb_c_no
+            // 
+            this.tb_c_no.Location = new System.Drawing.Point(694, 74);
+            this.tb_c_no.Name = "tb_c_no";
+            this.tb_c_no.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_no.TabIndex = 14;
+            // 
+            // tb_c_worktype
+            // 
+            this.tb_c_worktype.Location = new System.Drawing.Point(694, 39);
+            this.tb_c_worktype.Name = "tb_c_worktype";
+            this.tb_c_worktype.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_worktype.TabIndex = 14;
+            // 
+            // tb_c_check
+            // 
+            this.tb_c_check.Location = new System.Drawing.Point(481, 36);
+            this.tb_c_check.Name = "tb_c_check";
+            this.tb_c_check.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_check.TabIndex = 14;
+            // 
+            // tb_c_ang_unit
+            // 
+            this.tb_c_ang_unit.Location = new System.Drawing.Point(280, 71);
+            this.tb_c_ang_unit.Name = "tb_c_ang_unit";
+            this.tb_c_ang_unit.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_ang_unit.TabIndex = 14;
+            // 
+            // tb_c_ang
+            // 
+            this.tb_c_ang.Location = new System.Drawing.Point(280, 33);
+            this.tb_c_ang.Name = "tb_c_ang";
+            this.tb_c_ang.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_ang.TabIndex = 14;
+            // 
+            // tb_c_torque_unit
+            // 
+            this.tb_c_torque_unit.Location = new System.Drawing.Point(82, 71);
+            this.tb_c_torque_unit.Name = "tb_c_torque_unit";
+            this.tb_c_torque_unit.Size = new System.Drawing.Size(108, 21);
+            this.tb_c_torque_unit.TabIndex = 14;
             // 
             // button6
             // 
@@ -439,11 +440,22 @@ namespace Torque_Tool
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(842, 45);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(88, 30);
+            this.button11.TabIndex = 19;
+            this.button11.Text = "设置";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1131, 450);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button9);
@@ -520,6 +532,7 @@ namespace Torque_Tool
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
 

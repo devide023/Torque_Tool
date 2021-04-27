@@ -26,6 +26,7 @@ namespace Torque_Tool
             };
             s = SerialService.CreateInstance(option);
             s.Receive_Result += S_Receive_Result;
+            s.Event_Msg += S_Event_Msg;
             s.Init();
 
             foreach (var item in Enum.GetValues(typeof(Torque.Common.Common.TorqueUnit)))
@@ -40,6 +41,11 @@ namespace Torque_Tool
             this.ddl_unit.DisplayMember = "name";
             this.ddl_unit.ValueMember = "code";
 
+        }
+
+        private void S_Event_Msg(sys_message obj)
+        {
+            MessageBox.Show(obj.messageinfo, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void S_Receive_Result(sys_receive_data obj)
@@ -132,6 +138,28 @@ namespace Torque_Tool
         private void button10_Click(object sender, EventArgs e)
         {
             s.CommuitType = ComType.M3;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string torque_hi = tb_up.Text;
+            string torque_lo = tb_down.Text;
+            //int unita = ((dynamic)ddl_unit.SelectedItem).code;
+            string mh = tb_mh.Text;
+            string angd = Convert.ToInt32( this.tb_angd.Text).ToString().PadLeft(3,'0');
+            string hi = Convert.ToInt32(this.tb_hi.Text).ToString().PadLeft(3, '0');
+            string lo = Convert.ToInt32(this.tb_lo.Text).ToString().PadLeft(3, '0');
+
+            s.SendCmd(new sys_send_cmd()
+            {
+                Torque_Hi = torque_hi,
+                Torque_Lo = torque_lo,
+                Torque_Close = mh,
+                Ang_Second = angd,
+                Ang_Hi = hi,
+                Ang_Lo = lo
+            }); 
+
         }
     }
 }
